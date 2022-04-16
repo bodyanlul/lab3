@@ -15,7 +15,7 @@
   \*********************/
 /***/ (() => {
 
-eval("\n\n//# sourceURL=webpack:///./js/index.js?");
+eval("async function getVac() {\r\n    let job = document.getElementById(\"in\").value;\r\n    console.log(job);\r\n    let url = `https://api.hh.ru/vacancies?currency=RUR&only_with_salary=true&text=${job}`;\r\n    let response = await fetch(url).then(res => res.json()).then(ans => {\r\n        console.log(ans);\r\n        let vac =\"\";\r\n        for(let i = 0; i<ans.items.length;i++)\r\n        {\r\n        let salary = \"\"\r\n        if(ans.items[i].salary.from!=null && ans.items[i].salary.to!=null)\r\n        {\r\n            salary = \"\"+ans.items[i].salary.from+\"-\"+ans.items[i].salary.to+\" \"+ans.items[i].salary.currency;\r\n        }\r\n        else if (ans.items[i].salary.from ==null)\r\n        {\r\n            salary = \"Не указана\";\r\n        }\r\n        else if(ans.items[i].salary.to==null)\r\n        {\r\n            salary = \"\"+ans.items[i].salary.from+\" \"+ans.items[i].salary.currency;\r\n        }\r\n        vac += \"Название: \"+ans.items[i].name +'\\n'+\"Город: \"+ans.items[i].area.name+'\\n'+\"Зарплата: \"+salary+'\\n'+\"Ссылка: \"+ans.items[i].alternate_url+'\\n'+\"__________________________________\"+'\\n';\r\n        }\r\n        console.log(vac);\r\n        document.getElementById(\"task\").innerText=vac;\r\n    })\r\n    \r\n}\n\n//# sourceURL=webpack:///./js/index.js?");
 
 /***/ })
 
